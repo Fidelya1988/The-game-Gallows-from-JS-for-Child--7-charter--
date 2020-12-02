@@ -26,11 +26,12 @@
         }
 
         var remainingLetters = word.length; //(літери, які залишились невгаданими)
-
-        while (remainingLetters > 0) {
+        var numberOfattempts = 3; //кылькысть спроб
+       
+        while (remainingLetters > 0 && numberOfattempts >0) {
             alert(answerArray.join(" ")); //перетворюємо масив з рисочками на рядок
             var guess = prompt("Guess a letter, or click Cancel to stop playing.")
-            
+
             /*(введена літера)*/
             if (guess === null) {
                 break;
@@ -41,17 +42,18 @@
                     if (word[j] === guess) {
                         answerArray[j] = guess;
                         remainingLetters--;
-                        } else if (guess === word[j].toUpperCase()) {
-                            answerArray[j] = guess.toLowerCase();
-                            remainingLetters--;
+                    } else if (guess === word[j].toUpperCase()) {
+                        answerArray[j] = guess.toLowerCase();
+                        remainingLetters--;
 
-                        }
-                    }
+                    } 
                 }
             }
+            numberOfattempts--;
+        }
 
-            alert(answerArray.join(" ")); //відповідь
-            alert("Good job! the answer was " + word);
+        alert(answerArray.join(" ")); //відповідь
+        alert("Good job! the answer was " + word);
 
     </script>
 </body>
