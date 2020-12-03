@@ -26,7 +26,7 @@
         }
 
         var remainingLetters = word.length; //(літери, які залишились невгаданими)
-        var numberOfattempts = 3; //кылькысть спроб
+        var numberOfattempts = word.length*2; //кількість спроб
        
         while (remainingLetters > 0 && numberOfattempts >0) {
             alert(answerArray.join(" ")); //перетворюємо масив з рисочками на рядок
@@ -39,7 +39,7 @@
                 alert("Please enter a single letter")
             } else {
                 for (var j = 0; j < word.length; j++) {
-                    if (word[j] === guess) {
+                    if (word[j] === guess && answerArray[j] === "_") {
                         answerArray[j] = guess;
                         remainingLetters--;
                     } else if (guess === word[j].toUpperCase()) {
@@ -49,7 +49,7 @@
                     } 
                 }
             }
-            numberOfattempts--;
+            numberOfattempts--; 
         }
 
         alert(answerArray.join(" ")); //відповідь
