@@ -1,20 +1,29 @@
 var words = [
     "cat", "dog"
 ];
+function pickWord() {
+    return words[Math.floor(Math.random() * words.length)];
 
-var word = words[Math.floor(Math.random() * words.length)];
+}; // отримуємо слово з масиву з відповідями
+var word = pickWord();
+
+/*function setupAnswerArray(word) {
+   
+   
+};
+*/
 
 var answerArray = [];
 for (var i = 0; i < word.length; i++) {
     answerArray[i] = "_";
-    /*массив з літерами відповіді*/
-
+    
 }
 
-var remainingLetters = word.length; //(літери, які залишились невгаданими)
-var numberOfattempts = word.length*2; //кількість спроб
 
-while (remainingLetters > 0 && numberOfattempts >0) {
+var remainingLetters = word.length; //(літери, які залишились невгаданими)
+var numberOfattempts = 3;//word.length * 2; //кількість спроб
+
+while (remainingLetters > 0 && numberOfattempts > 0) {
     alert(answerArray.join(" ")); //перетворюємо масив з рисочками на рядок
     var guess = prompt("Guess a letter, or click Cancel to stop playing.")
 
@@ -32,10 +41,10 @@ while (remainingLetters > 0 && numberOfattempts >0) {
                 answerArray[j] = guess.toLowerCase();
                 remainingLetters--;
 
-            } 
+            }
         }
     }
-    numberOfattempts--; 
+    numberOfattempts--;
 }
 
 alert(answerArray.join(" ")); //відповідь
