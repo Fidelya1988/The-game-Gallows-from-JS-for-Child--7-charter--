@@ -1,5 +1,5 @@
 var words = [
-    "cat", "dog"
+    "cat", "ara"
 ];
 function pickWord() {
     return words[Math.floor(Math.random() * words.length)];
@@ -7,17 +7,17 @@ function pickWord() {
 }; // отримуємо слово з масиву з відповідями
 var word = pickWord();
 
-/*function setupAnswerArray(word) {
-   
-   
-};
-*/
+function setupAnswerArray(word) {
+    var answerOfArray = [];
+    for (var i = 0; i < word.length; i++) {
+        answerOfArray[i] = "_";
 
-var answerArray = [];
-for (var i = 0; i < word.length; i++) {
-    answerArray[i] = "_";
-    
-}
+    }
+    return answerOfArray;
+};
+
+var answerArray = setupAnswerArray(word);
+
 
 
 var remainingLetters = word.length; //(літери, які залишились невгаданими)
@@ -34,6 +34,7 @@ while (remainingLetters > 0 && numberOfattempts > 0) {
         alert("Please enter a single letter")
     } else {
         for (var j = 0; j < word.length; j++) {
+
             if (word[j] === guess && answerArray[j] === "_") {
                 answerArray[j] = guess;
                 remainingLetters--;
