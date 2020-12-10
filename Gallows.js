@@ -18,14 +18,16 @@ function setupAnswerArray(word) {
 
 var answerArray = setupAnswerArray(word);
 
-
+function getGuess() {
+ return prompt("Guess a letter, or click Cancel to stop playing.");
+};
 
 var remainingLetters = word.length; //(літери, які залишились невгаданими)
 var numberOfattempts = 3;//word.length * 2; //кількість спроб
 
 while (remainingLetters > 0 && numberOfattempts > 0) {
     alert(answerArray.join(" ")); //перетворюємо масив з рисочками на рядок
-    var guess = prompt("Guess a letter, or click Cancel to stop playing.")
+    var guess = getGuess();
 
     /*(введена літера)*/
     if (guess === null) {
