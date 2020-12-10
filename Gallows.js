@@ -22,12 +22,31 @@ function getGuess() {
  return prompt("Guess a letter, or click Cancel to stop playing.");
 };
 
+function updateGameState(guess, word, answerArray){
+    var guessLetters = 0;
+    for (var j = 0; j < word.length; j++) {
+       
+        if (word[j] === guess && answerArray[j] === "_") {
+            answerArray[j] = guess;
+            guessLetters++;
+        } else if (guess === word[j].toUpperCase()) {
+            answerArray[j] = guess.toLowerCase();
+            guessLetters++;
+
+        }
+    }
+    console.log (guessLetters);
+    return guessLetters;  
+};
+
 var remainingLetters = word.length; //(літери, які залишились невгаданими)
-var numberOfattempts = 3;//word.length * 2; //кількість спроб
+var numberOfattempts = word.length * 2; //кількість спроб
 
 while (remainingLetters > 0 && numberOfattempts > 0) {
     alert(answerArray.join(" ")); //перетворюємо масив з рисочками на рядок
     var guess = getGuess();
+    
+
 
     /*(введена літера)*/
     if (guess === null) {
@@ -35,17 +54,8 @@ while (remainingLetters > 0 && numberOfattempts > 0) {
     } else if (guess.length !== 1) {
         alert("Please enter a single letter")
     } else {
-        for (var j = 0; j < word.length; j++) {
-
-            if (word[j] === guess && answerArray[j] === "_") {
-                answerArray[j] = guess;
-                remainingLetters--;
-            } else if (guess === word[j].toUpperCase()) {
-                answerArray[j] = guess.toLowerCase();
-                remainingLetters--;
-
-            }
-        }
+      var correctGuesses = updateGameState(guess, word, answerArray);
+     remainingLetters -= correctGuesses;
     }
     numberOfattempts--;
 }
