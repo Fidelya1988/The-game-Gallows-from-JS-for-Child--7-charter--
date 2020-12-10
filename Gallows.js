@@ -19,13 +19,13 @@ function setupAnswerArray(word) {
 var answerArray = setupAnswerArray(word);
 
 function getGuess() {
- return prompt("Guess a letter, or click Cancel to stop playing.");
+    return prompt("Guess a letter, or click Cancel to stop playing.");
 };
 
-function updateGameState(guess, word, answerArray){
+function updateGameState(guess, word, answerArray) {
     var guessLetters = 0;
     for (var j = 0; j < word.length; j++) {
-       
+
         if (word[j] === guess && answerArray[j] === "_") {
             answerArray[j] = guess;
             guessLetters++;
@@ -35,8 +35,14 @@ function updateGameState(guess, word, answerArray){
 
         }
     }
-    console.log (guessLetters);
-    return guessLetters;  
+    console.log(guessLetters);
+    return guessLetters;
+};
+
+
+function showAnswerAndCongratulatePlayer(answerArray) {
+ return alert(answerArray.join(" ")) + alert("Good job! The answer was " + word);
+
 };
 
 var remainingLetters = word.length; //(літери, які залишились невгаданими)
@@ -45,7 +51,7 @@ var numberOfattempts = word.length * 2; //кількість спроб
 while (remainingLetters > 0 && numberOfattempts > 0) {
     alert(answerArray.join(" ")); //перетворюємо масив з рисочками на рядок
     var guess = getGuess();
-    
+
 
 
     /*(введена літера)*/
@@ -54,12 +60,10 @@ while (remainingLetters > 0 && numberOfattempts > 0) {
     } else if (guess.length !== 1) {
         alert("Please enter a single letter")
     } else {
-      var correctGuesses = updateGameState(guess, word, answerArray);
-     remainingLetters -= correctGuesses;
+        var correctGuesses = updateGameState(guess, word, answerArray);
+        remainingLetters -= correctGuesses;
     }
     numberOfattempts--;
 }
 
-alert(answerArray.join(" ")); //відповідь
-alert("Good job! the answer was " + word);
-
+showAnswerAndCongratulatePlayer(answerArray);
