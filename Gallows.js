@@ -3,8 +3,8 @@ var ctx = canvas.getContext("2d");       //ДЯПЧИК
 ctx.strokeStyle = "Red"
 ctx.lineWidth = 3;
 
-var unCorrectguesses = 0;
-function toDrawMan(/*unCorrectguesses*/) {
+
+function toDrawMan(unCorrectguesses) {
     ctx.beginPath();
     if (unCorrectguesses > 0) {
         ctx.moveTo(50, 50); //голова
@@ -14,7 +14,7 @@ function toDrawMan(/*unCorrectguesses*/) {
         ctx.moveTo(50, 50); //голова
         ctx.lineTo(70, 50);
         ctx.lineTo(70, 70);
-    } 
+    }
     if (unCorrectguesses > 2) {
         ctx.moveTo(50, 50); //голова
         ctx.lineTo(70, 50);
@@ -75,7 +75,7 @@ function toDrawMan(/*unCorrectguesses*/) {
         ctx.lineTo(50, 135);//_______
         ctx.moveTo(60, 90); //ліва рука
         ctx.lineTo(75, 80);//_____________
-    } 
+    }
     if (unCorrectguesses > 8) {
         ctx.moveTo(50, 50); //голова
         ctx.lineTo(70, 50);
@@ -103,7 +103,7 @@ function pickWord() {
     return words[Math.floor(Math.random() * words.length)];
 
 }; // отримуємо слово з масиву з відповідями
-var word = pickWord();
+
 
 function setupAnswerArray(word) {
     var answerOfArray = [];
@@ -114,13 +114,12 @@ function setupAnswerArray(word) {
     return answerOfArray;
 };
 
-var answerArray = setupAnswerArray(word);
+
 
 function getGuess() {
     return prompt("Guess a letter, or click Cancel to stop playing.");
 };
 
-var unCorrectguesses = 5; //кількість неправильних відповідей
 
 function updateGameState(guess, word, answerArray) {
     var guessLetters = 0; // кількість вгаданих букв у слові
@@ -134,8 +133,7 @@ function updateGameState(guess, word, answerArray) {
             guessLetters++;
 
         } else if (word[j] !== guess) {
-            //unCorrectguesses++;
-            //console.log("unCorrectguesses " + unCorrectguesses);
+
 
         }
     }
@@ -151,10 +149,14 @@ function showAnswerAndCongratulatePlayer(answerArray) {
 
 };
 
+var word = pickWord();
+var answerArray = setupAnswerArray(word);
 var remainingLetters = word.length; //(літери, які залишились невгаданими)
-var numberOfattempts = 3; //кількість спроб
+var unCorrectguesses = 0; //кількість неправильних відповідей
 
-while (remainingLetters > 0 && numberOfattempts > 0) {
+
+
+while (remainingLetters > 0 && unCorrectguesses < 9) {
     alert(answerArray.join(" ")); //перетворюємо масив з рисочками на рядок
     var guess = getGuess();
 
@@ -168,10 +170,15 @@ while (remainingLetters > 0 && numberOfattempts > 0) {
     } else {
         var correctGuesses = updateGameState(guess, word, answerArray);
         remainingLetters -= correctGuesses;
+        if (correctGuesses === 0) {
+
+            unCorrectguesses++
+            toDrawMan(unCorrectguesses);
+        }
     }
-    numberOfattempts--;
+
+
 }
 
 showAnswerAndCongratulatePlayer(answerArray);
 
-toDrawMan(unCorrectguesses);
