@@ -96,9 +96,7 @@ function toDrawMan(unCorrectguesses) {
     ctx.stroke();
 };
 
-var words = [
-    "cat", "ara"
-];
+
 function pickWord() {
     return words[Math.floor(Math.random() * words.length)];
 
@@ -144,11 +142,17 @@ function updateGameState(guess, word, answerArray) {
 
 
 function showAnswerAndCongratulatePlayer(answerArray) {
-    alert(answerArray.join(" "))
-    alert("Good job! The answer was " + word);
+    if (unCorrectguesses >= 9) {
+        alert("Sorry, you lost : - ( The answer was " + word);
+    } else {
 
+        alert(answerArray.join(" "));
+        alert("Good job! The answer was " + word);
+    }
 };
-
+var words = [
+    "cat", "ara", "flamingo"
+];
 var word = pickWord();
 var answerArray = setupAnswerArray(word);
 var remainingLetters = word.length; //(літери, які залишились невгаданими)
