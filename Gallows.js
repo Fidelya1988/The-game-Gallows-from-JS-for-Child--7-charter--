@@ -136,7 +136,7 @@ function updateGameState(guess, word, answerArray) {
         }
     }
 
-   
+
     return guessLetters;
 };
 
@@ -158,38 +158,40 @@ var answerArray = setupAnswerArray(word);
 var remainingLetters = word.length; //(літери, які залишились невгаданими)
 var unCorrectguesses = 0; //кількість неправильних відповідей
 
-var timeId = setTimeout( function unCorrectGuesses () {
-if (remainingLetters > 0 && unCorrectguesses < 9) {
-    alert(answerArray.join(" ")); //перетворюємо масив з рисочками на рядок
-    var guess = getGuess();
+setTimeout(function unCorrectGuesses() {
+    if (remainingLetters > 0 && unCorrectguesses < 9) {
+        alert(answerArray.join(" ")); //перетворюємо масив з рисочками на рядок
+        var guess = getGuess();
 
 
 
-    /*(введена літера)*/
-    if (guess === null) {
-        setTimeout(unCorrectGuesses, 1000);
-    } else if (guess.length !== 1) {
-        alert("Please enter a single letter")
-        guess = getGuess();
-    } else {
-       
-        var correctGuesses = updateGameState(guess, word, answerArray);
-        remainingLetters -= correctGuesses;
-        if (correctGuesses === 0) {
-
-            unCorrectguesses++
-            toDrawMan(unCorrectguesses);
-            setTimeout(unCorrectGuesses, 1000);
+        /*(введена літера)*/
+        if (guess === null) {
+            setTimeout(unCorrectGuesses, 500);
+        } else if (guess.length !== 1) {
+            alert("Please enter a single letter")
+            guess = getGuess();
         } else {
-            setTimeout(unCorrectGuesses, 1000);
+
+            var correctGuesses = updateGameState(guess, word, answerArray);
+            remainingLetters -= correctGuesses;
+            if (correctGuesses === 0) {
+
+                unCorrectguesses++
+                toDrawMan(unCorrectguesses);
+                setTimeout(unCorrectGuesses, 500);
+            } else {
+                setTimeout(unCorrectGuesses, 500);
+            }
+
         }
-    
+
+    } else {
+
+
+
+        showAnswerAndCongratulatePlayer(answerArray);
     }
-
-} else {
-
-  
-
-showAnswerAndCongratulatePlayer(answerArray);
-}
 }, 0);
+
+//план: сделать возможность прервать игру
