@@ -158,9 +158,8 @@ var answerArray = setupAnswerArray(word);
 var remainingLetters = word.length; //(літери, які залишились невгаданими)
 var unCorrectguesses = 0; //кількість неправильних відповідей
 
-
-
-while (remainingLetters > 0 && unCorrectguesses < 9) {
+var timeId = setTimeout( function unCorrectGuesses () {
+if (remainingLetters > 0 && unCorrectguesses < 9) {
     alert(answerArray.join(" ")); //перетворюємо масив з рисочками на рядок
     var guess = getGuess();
 
@@ -168,21 +167,29 @@ while (remainingLetters > 0 && unCorrectguesses < 9) {
 
     /*(введена літера)*/
     if (guess === null) {
-        break;
+        setTimeout(unCorrectGuesses, 1000);
     } else if (guess.length !== 1) {
         alert("Please enter a single letter")
+        guess = getGuess();
     } else {
+       
         var correctGuesses = updateGameState(guess, word, answerArray);
         remainingLetters -= correctGuesses;
         if (correctGuesses === 0) {
 
             unCorrectguesses++
             toDrawMan(unCorrectguesses);
+            setTimeout(unCorrectGuesses, 1000);
+        } else {
+            setTimeout(unCorrectGuesses, 1000);
         }
+    
     }
 
+} else {
 
-}
+  
 
 showAnswerAndCongratulatePlayer(answerArray);
-
+}
+}, 0);
