@@ -136,7 +136,7 @@ function updateGameState(guess, word, answerArray) {
         }
     }
 
-    console.log(guessLetters);
+   
     return guessLetters;
 };
 
