@@ -149,27 +149,27 @@ setTimeout(function unCorrectGuesses() {
         return;
     }
 
+    // заранее готовим переменную; по умолчанию останавливать игру не надо
+    var stopTheGame = false;
+
     alert(answerArray.join(" ")); //перетворюємо масив з рисочками на рядок
     var guess = getGuess();
 
     /*(введена літера)*/
     if (guess === null) {
-        var stopThegame = confirm("Do you want to stop the game?");
-        if (!stopThegame) {
-            setTimeout(unCorrectGuesses, 500);
-        }
+        stopTheGame = confirm("Do you want to stop the game?");
     } else if (guess.length !== 1) {
         alert("Please enter a single letter");
-        setTimeout(unCorrectGuesses, 500);
     } else {
         var correctGuesses = updateGameState(guess, word, answerArray);
         remainingLetters -= correctGuesses;
         if (correctGuesses === 0) {
             unCorrectguesses++;
             toDrawMan(unCorrectguesses);
-            setTimeout(unCorrectGuesses, 500);
-        } else {
-            setTimeout(unCorrectGuesses, 500);
         }
+    }
+
+    if (!stopTheGame) {
+        setTimeout(unCorrectGuesses, 500);
     }
 }, 0);
