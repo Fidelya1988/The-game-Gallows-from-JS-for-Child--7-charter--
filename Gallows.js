@@ -143,31 +143,33 @@ var remainingLetters = word.length; //(літери, які залишились
 var unCorrectguesses = 0; //кількість неправильних відповідей
 
 setTimeout(function unCorrectGuesses() {
-    if (remainingLetters > 0 && unCorrectguesses < 9) {
-        alert(answerArray.join(" ")); //перетворюємо масив з рисочками на рядок
-        var guess = getGuess();
+    // пользователь выиграл или проиграл, игра закончилась
+    if (remainingLetters <= 0 || unCorrectguesses >= 9) {
+        showAnswerAndCongratulatePlayer(answerArray);
+        return;
+    }
 
-        /*(введена літера)*/
-        if (guess === null) {
-            var stopThegame = confirm("Do you want to stop the game?");
-            if (!stopThegame) {
-                setTimeout(unCorrectGuesses, 500);
-            }
-        } else if (guess.length !== 1) {
-            alert("Please enter a single letter");
+    alert(answerArray.join(" ")); //перетворюємо масив з рисочками на рядок
+    var guess = getGuess();
+
+    /*(введена літера)*/
+    if (guess === null) {
+        var stopThegame = confirm("Do you want to stop the game?");
+        if (!stopThegame) {
+            setTimeout(unCorrectGuesses, 500);
+        }
+    } else if (guess.length !== 1) {
+        alert("Please enter a single letter");
+        setTimeout(unCorrectGuesses, 500);
+    } else {
+        var correctGuesses = updateGameState(guess, word, answerArray);
+        remainingLetters -= correctGuesses;
+        if (correctGuesses === 0) {
+            unCorrectguesses++;
+            toDrawMan(unCorrectguesses);
             setTimeout(unCorrectGuesses, 500);
         } else {
-            var correctGuesses = updateGameState(guess, word, answerArray);
-            remainingLetters -= correctGuesses;
-            if (correctGuesses === 0) {
-                unCorrectguesses++;
-                toDrawMan(unCorrectguesses);
-                setTimeout(unCorrectGuesses, 500);
-            } else {
-                setTimeout(unCorrectGuesses, 500);
-            }
+            setTimeout(unCorrectGuesses, 500);
         }
-    } else {
-        showAnswerAndCongratulatePlayer(answerArray);
     }
 }, 0);
