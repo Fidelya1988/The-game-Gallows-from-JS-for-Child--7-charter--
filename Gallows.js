@@ -174,7 +174,7 @@ setTimeout(function unCorrectGuesses() {
         }
         } else if (guess.length !== 1) {
             alert("Please enter a single letter")
-            guess = getGuess();
+            setTimeout(unCorrectGuesses, 500);
         } else {
 
             var correctGuesses = updateGameState(guess, word, answerArray);
