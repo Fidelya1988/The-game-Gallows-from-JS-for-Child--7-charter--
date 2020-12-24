@@ -167,7 +167,11 @@ setTimeout(function unCorrectGuesses() {
 
         /*(введена літера)*/
         if (guess === null) {
+            var stopThegame = confirm("Do you want to stop the game?");
+            if (!stopThegame) {
+
             setTimeout(unCorrectGuesses, 500);
+        }
         } else if (guess.length !== 1) {
             alert("Please enter a single letter")
             guess = getGuess();
@@ -194,5 +198,4 @@ setTimeout(function unCorrectGuesses() {
     }
 }, 0);
 
-//план: сделать возможность прервать игру.
-//Разобраться с коммитами
+
