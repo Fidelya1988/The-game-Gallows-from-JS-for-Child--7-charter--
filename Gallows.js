@@ -198,4 +198,4 @@ setTimeout(function unCorrectGuesses() {
     }
 }, 0);
 
-
+// Моя версия кода
